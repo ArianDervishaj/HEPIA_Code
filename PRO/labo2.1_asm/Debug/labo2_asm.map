@@ -1,0 +1,309 @@
+Archive member included because of file (symbol)
+
+c:/nxp/lpcxpresso_8.0.0_526/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
+                              ./src/cr_startup_lpc176x.o (__main)
+
+Allocating common symbols
+Common symbol       size              file
+
+exo                 0x1               ./src/labo2_asm.o
+
+Discarded input sections
+
+ .data          0x00000000        0x0 ./src/assembleur.o
+ .bss           0x00000000        0x0 ./src/assembleur.o
+ .group         0x00000000        0x8 ./src/cr_startup_lpc176x.o
+ .text          0x00000000        0x0 ./src/cr_startup_lpc176x.o
+ .data          0x00000000        0x0 ./src/cr_startup_lpc176x.o
+ .bss           0x00000000        0x0 ./src/cr_startup_lpc176x.o
+ .group         0x00000000        0x8 ./src/labo2_asm.o
+ .group         0x00000000        0x8 ./src/labo2_asm.o
+ .group         0x00000000        0x8 ./src/labo2_asm.o
+ .group         0x00000000        0x8 ./src/labo2_asm.o
+ .text          0x00000000        0x0 ./src/labo2_asm.o
+ .data          0x00000000        0x0 ./src/labo2_asm.o
+ .bss           0x00000000        0x0 ./src/labo2_asm.o
+ .text          0x00000000        0x0 c:/nxp/lpcxpresso_8.0.0_526/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
+ .data          0x00000000        0x0 c:/nxp/lpcxpresso_8.0.0_526/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
+ .bss           0x00000000        0x0 c:/nxp/lpcxpresso_8.0.0_526/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+MFlash512        0x00000000         0x00080000         xr
+RamLoc32         0x10000000         0x00008000         xrw
+RamAHB32         0x2007c000         0x00008000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./src/assembleur.o
+LOAD ./src/cr_startup_lpc176x.o
+LOAD ./src/labo2_asm.o
+START GROUP
+LOAD c:/nxp/lpcxpresso_8.0.0_526/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a
+LOAD c:/nxp/lpcxpresso_8.0.0_526/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m\libcr_eabihelpers.a
+END GROUP
+                0x00000000                __base_MFlash512 = 0x0
+                0x00000000                __base_Flash = 0x0
+                0x00080000                __top_MFlash512 = 0x80000
+                0x00080000                __top_Flash = 0x80000
+                0x10000000                __base_RamLoc32 = 0x10000000
+                0x10000000                __base_RAM = 0x10000000
+                0x10008000                __top_RamLoc32 = 0x10008000
+                0x10008000                __top_RAM = 0x10008000
+                0x2007c000                __base_RamAHB32 = 0x2007c000
+                0x2007c000                __base_RAM2 = 0x2007c000
+                0x20084000                __top_RamAHB32 = 0x20084000
+                0x20084000                __top_RAM2 = 0x20084000
+
+.text           0x00000000      0x2d8
+ FILL mask 0xff
+                0x00000000                __vectors_start__ = ABSOLUTE (.)
+ *(.isr_vector)
+ .isr_vector    0x00000000       0xcc ./src/cr_startup_lpc176x.o
+                0x00000000                g_pfnVectors
+                0x000000cc                . = ALIGN (0x4)
+                0x000000cc                __section_table_start = .
+                0x000000cc                __data_section_table = .
+                0x000000cc        0x4 LONG 0x2d8 LOADADDR (.data)
+                0x000000d0        0x4 LONG 0x10000000 ADDR (.data)
+                0x000000d4        0x4 LONG 0x0 SIZEOF (.data)
+                0x000000d8        0x4 LONG 0x2d8 LOADADDR (.data_RAM2)
+                0x000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
+                0x000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
+                0x000000e4                __data_section_table_end = .
+                0x000000e4                __bss_section_table = .
+                0x000000e4        0x4 LONG 0x10000000 ADDR (.bss)
+                0x000000e8        0x4 LONG 0x4 SIZEOF (.bss)
+                0x000000ec        0x4 LONG 0x2007c000 ADDR (.bss_RAM2)
+                0x000000f0        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
+                0x000000f4                __bss_section_table_end = .
+                0x000000f4                __section_table_end = .
+ *(.after_vectors*)
+ .after_vectors
+                0x000000f4       0x7c ./src/cr_startup_lpc176x.o
+                0x000000f4                NMI_Handler
+                0x000000f6                HardFault_Handler
+                0x000000f8                MemManage_Handler
+                0x000000fa                BusFault_Handler
+                0x000000fc                UsageFault_Handler
+                0x000000fe                SVC_Handler
+                0x00000100                DebugMon_Handler
+                0x00000102                PendSV_Handler
+                0x00000104                SysTick_Handler
+                0x00000106                PWM1_IRQHandler
+                0x00000106                I2C1_IRQHandler
+                0x00000106                EINT2_IRQHandler
+                0x00000106                UART1_IRQHandler
+                0x00000106                EINT3_IRQHandler
+                0x00000106                CANActivity_IRQHandler
+                0x00000106                TIMER3_IRQHandler
+                0x00000106                UART0_IRQHandler
+                0x00000106                MCPWM_IRQHandler
+                0x00000106                I2C0_IRQHandler
+                0x00000106                IntDefaultHandler
+                0x00000106                RIT_IRQHandler
+                0x00000106                CAN_IRQHandler
+                0x00000106                PLL1_IRQHandler
+                0x00000106                SSP0_IRQHandler
+                0x00000106                I2S_IRQHandler
+                0x00000106                I2C2_IRQHandler
+                0x00000106                RTC_IRQHandler
+                0x00000106                TIMER0_IRQHandler
+                0x00000106                SPI_IRQHandler
+                0x00000106                UART3_IRQHandler
+                0x00000106                EINT1_IRQHandler
+                0x00000106                TIMER1_IRQHandler
+                0x00000106                UART2_IRQHandler
+                0x00000106                ADC_IRQHandler
+                0x00000106                SSP1_IRQHandler
+                0x00000106                USB_IRQHandler
+                0x00000106                BOD_IRQHandler
+                0x00000106                USBActivity_IRQHandler
+                0x00000106                WDT_IRQHandler
+                0x00000106                PLL0_IRQHandler
+                0x00000106                QEI_IRQHandler
+                0x00000106                EINT0_IRQHandler
+                0x00000106                TIMER2_IRQHandler
+                0x00000106                DMA_IRQHandler
+                0x00000106                ENET_IRQHandler
+                0x00000108                data_init
+                0x0000011e                bss_init
+                0x00000130                ResetISR
+ *(.text*)
+ .text          0x00000170       0x26 ./src/assembleur.o
+                0x00000170                funcexo1
+                0x0000017c                funcexo2
+                0x00000192                funcexo3
+                0x00000194                funcexo4
+ *fill*         0x00000196        0x2 
+ .text.function1_bonus
+                0x00000198       0x18 ./src/labo2_asm.o
+                0x00000198                function1_bonus
+ .text.function2_bonus
+                0x000001b0       0x18 ./src/labo2_asm.o
+                0x000001b0                function2_bonus
+ .text.main     0x000001c8      0x10c ./src/labo2_asm.o
+                0x000001c8                main
+ .text.__weak_main
+                0x000002d4        0x4 c:/nxp/lpcxpresso_8.0.0_526/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
+                0x000002d4                __weak_main
+                0x000002d4                __main
+ *(.rodata .rodata.* .constdata .constdata.*)
+                0x000002d8                . = ALIGN (0x4)
+
+.glue_7         0x000002d8        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x000002d8        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x000002d8        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x000002d8        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x000002d8        0x0
+ .iplt          0x00000000        0x0 ./src/assembleur.o
+
+.rel.dyn        0x000002d8        0x0
+ .rel.iplt      0x00000000        0x0 ./src/assembleur.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x000002d8                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x000002d8                __exidx_end = .
+                0x000002d8                _etext = .
+
+.data_RAM2      0x2007c000        0x0 load address 0x000002d8
+ FILL mask 0xff
+                0x2007c000                PROVIDE (__start_data_RAM2, .)
+ *(.ramfunc.$RAM2)
+ *(.ramfunc.$RamAHB32)
+ *(.data.$RAM2*)
+ *(.data.$RamAHB32*)
+                0x2007c000                . = ALIGN (0x4)
+                0x2007c000                PROVIDE (__end_data_RAM2, .)
+
+.uninit_RESERVED
+                0x10000000        0x0
+ *(.bss.$RESERVED*)
+                0x10000000                . = ALIGN (0x4)
+                0x10000000                _end_uninit_RESERVED = .
+
+.data           0x10000000        0x0 load address 0x000002d8
+ FILL mask 0xff
+                0x10000000                _data = .
+ *(vtable)
+ *(.ramfunc*)
+ *(.data*)
+                0x10000000                . = ALIGN (0x4)
+                0x10000000                _edata = .
+
+.igot.plt       0x10000000        0x0 load address 0x000002d8
+ .igot.plt      0x00000000        0x0 ./src/assembleur.o
+
+.bss_RAM2       0x2007c000        0x0
+                0x2007c000                PROVIDE (__start_bss_RAM2, .)
+ *(.bss.$RAM2*)
+ *(.bss.$RamAHB32*)
+                0x2007c000                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x2007c000                PROVIDE (__end_bss_RAM2, .)
+
+.bss            0x10000000        0x4
+                0x10000000                _bss = .
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x10000000        0x1 ./src/labo2_asm.o
+                0x10000000                exo
+                0x10000004                . = ALIGN (0x4)
+ *fill*         0x10000001        0x3 
+                0x10000004                _ebss = .
+                0x10000004                PROVIDE (end, .)
+
+.noinit_RAM2    0x2007c000        0x0
+ *(.noinit.$RAM2*)
+ *(.noinit.$RamAHB32*)
+                0x2007c000                . = ALIGN (0x4)
+
+.noinit         0x10000004        0x0
+                0x10000004                _noinit = .
+ *(.noinit*)
+                0x10000004                . = ALIGN (0x4)
+                0x10000004                _end_noinit = .
+                0x10000004                PROVIDE (_pvHeapStart, DEFINED (__user_heap_base)?__user_heap_base:.)
+                0x10008000                PROVIDE (_vStackTop, DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
+                0xefff79f2                PROVIDE (__valid_user_code_checksum, (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
+OUTPUT(labo2_asm.axf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x2f
+ .ARM.attributes
+                0x00000000       0x21 ./src/assembleur.o
+ .ARM.attributes
+                0x00000021       0x33 ./src/cr_startup_lpc176x.o
+ .ARM.attributes
+                0x00000054       0x33 ./src/labo2_asm.o
+ .ARM.attributes
+                0x00000087       0x33 c:/nxp/lpcxpresso_8.0.0_526/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
+
+.comment        0x00000000       0xe0
+ .comment       0x00000000       0x70 ./src/cr_startup_lpc176x.o
+                                 0x71 (size before relaxing)
+ .comment       0x00000000       0x71 ./src/labo2_asm.o
+ .comment       0x00000070       0x70 c:/nxp/lpcxpresso_8.0.0_526/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
+                                 0x71 (size before relaxing)
+
+.debug_line     0x00000000      0x26c
+ .debug_line    0x00000000       0x57 ./src/assembleur.o
+ .debug_line    0x00000057       0xbc ./src/cr_startup_lpc176x.o
+ .debug_line    0x00000113      0x159 ./src/labo2_asm.o
+
+.debug_info     0x00000000      0x444
+ .debug_info    0x00000000       0x88 ./src/assembleur.o
+ .debug_info    0x00000088      0x26f ./src/cr_startup_lpc176x.o
+ .debug_info    0x000002f7      0x14d ./src/labo2_asm.o
+
+.debug_abbrev   0x00000000      0x1e4
+ .debug_abbrev  0x00000000       0x14 ./src/assembleur.o
+ .debug_abbrev  0x00000014      0x120 ./src/cr_startup_lpc176x.o
+ .debug_abbrev  0x00000134       0xb0 ./src/labo2_asm.o
+
+.debug_aranges  0x00000000       0xd0
+ .debug_aranges
+                0x00000000       0x20 ./src/assembleur.o
+ .debug_aranges
+                0x00000020       0x80 ./src/cr_startup_lpc176x.o
+ .debug_aranges
+                0x000000a0       0x30 ./src/labo2_asm.o
+
+.debug_loc      0x00000000      0x1be
+ .debug_loc     0x00000000      0x1be ./src/cr_startup_lpc176x.o
+
+.debug_ranges   0x00000000       0x90
+ .debug_ranges  0x00000000       0x70 ./src/cr_startup_lpc176x.o
+ .debug_ranges  0x00000070       0x20 ./src/labo2_asm.o
+
+.debug_macro    0x00000000     0x182a
+ .debug_macro   0x00000000       0x1d ./src/cr_startup_lpc176x.o
+ .debug_macro   0x0000001d      0x874 ./src/cr_startup_lpc176x.o
+ .debug_macro   0x00000891       0x3c ./src/labo2_asm.o
+ .debug_macro   0x000008cd      0x86e ./src/labo2_asm.o
+ .debug_macro   0x0000113b       0x10 ./src/labo2_asm.o
+ .debug_macro   0x0000114b      0x12d ./src/labo2_asm.o
+ .debug_macro   0x00001278      0x5b2 ./src/labo2_asm.o
+
+.debug_str      0x00000000     0x3e26
+ .debug_str     0x00000000     0x2633 ./src/cr_startup_lpc176x.o
+                               0x2646 (size before relaxing)
+ .debug_str     0x00002633     0x17f3 ./src/labo2_asm.o
+                               0x3c05 (size before relaxing)
+
+.debug_frame    0x00000000      0x170
+ .debug_frame   0x00000000       0xf0 ./src/cr_startup_lpc176x.o
+ .debug_frame   0x000000f0       0x80 ./src/labo2_asm.o
