@@ -1,5 +1,9 @@
+#include "Serie1.h"
+#include <assert.h>
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void ex1() {
   // a) les valeurs de p et pp ?
@@ -27,11 +31,6 @@ void ex1() {
   printf("La valeur de **pp : %ld\n", **pp);
 }
 
-struct replace {
-  char *string;
-  char new_char;
-};
-
 void ex2(struct replace *data) {
   // Implémentez une fonction qui remplace les espaces d'une chaîne de
   // caractères par un caractère spécifié. Votre fonction aura comme argument
@@ -52,23 +51,115 @@ void ex2(struct replace *data) {
   }
 }
 
-int main() {
+bool test_ex2(struct replace *data) {
+  int i = 0;
+  while (data->string[i] != '\0') {
+    if (data->string[i] == ' ') {
+      return false;
+    }
+    i++;
+  }
+  return true;
+}
 
-  int ex = 2;
+char *ex3(struct replace *data) {
+  int size = 0;
+  while (data->string[size] != '\0') {
+    size++;
+  }
+
+  char *new_string = (char *)calloc(size + 1, sizeof(char));
+  assert((new_string != NULL) && "Erreur dans le calloc !");
+
+  for (int i = 0; i < size; i++) {
+    if (data->string[size - i - 1] == ' ') {
+      new_string[i] = data->new_char;
+    } else {
+      new_string[i] = data->string[size - i - 1];
+    }
+  }
+  new_string[size] = '\0';
+  return new_string;
+}
+
+bool test_ex3(struct replace *data, struct replace *old_data) {
+  int size = 0;
+  while (old_data->string[size] != '\0') {
+    size++;
+  }
+
+  for (int i = 0; i < size; i++) {
+
+    if (old_data->string[i] == ' ') {
+      if (data->string[i] != data->new_char) {
+        return false;
+      }
+    } else {
+      if (data->string[i] != old_data->string[i]) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+void ex4(int n, float x, int y) {
+  for (int m = 0; m < n; m++) {
+    float result = pow(x, (y + m));
+    printf("Iteration %d: Result = %f\n", m, result);
+  }
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[]) {
+
+  int ex = 4;
+
+  if (ex == 4 && argc != 4) {
+    printf("Bouffon ! Tu sais pas compter jusqu'à 4 !\n");
+    printf("Usage: %s <n (iterations)> <x (float)> <y (int)>\n", argv[0]);
+    return 1;
+  }
 
   switch (ex) {
   case 1: {
-
     ex1();
     break;
   }
   case 2: {
     char string[] = "Ceci est un test !";
     struct replace data = {string, '*'};
-    
-    ex2(&data);
 
+    ex2(&data);
     printf("Modified string: %s\n", data.string);
+    printf("%d \n", test_ex2(&data));
+
+    break;
+  }
+  case 3: {
+    char string[] = "Ceci est un test !";
+    struct replace data = {string, '*'};
+    char *test = ex3(&data);
+
+    struct replace new_data = {test, '*'};
+
+    printf("%s\n", test);
+    printf("%s \n", data.string);
+
+    printf("%d \n", test_ex3(&new_data, &data));
+    free(test);
+    break;
+  }
+  case 4: {
+
+    int n = atoi(argv[1]);
+    float x = atof(argv[2]);
+    int y = atoi(argv[3]);
+
+    ex4(n, x, y);
     break;
   }
   }
