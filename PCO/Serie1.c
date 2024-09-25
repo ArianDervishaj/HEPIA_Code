@@ -116,7 +116,7 @@ void ex4(int n, float x, int y) {
 
 int main(int argc, char *argv[]) {
 
-  int ex = 4;
+  int ex = 3;
 
   if (ex == 4 && argc != 4) {
     printf("Bouffon ! Tu sais pas compter jusqu'à 4 !\n");
