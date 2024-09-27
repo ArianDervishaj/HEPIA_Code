@@ -1,2 +1,3 @@
 *.out
-./Baillif/venv
+/Baillif/venv
+__pycache__
