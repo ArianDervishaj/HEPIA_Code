@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <dirent.h>
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,35 +8,14 @@
 #include <time.h>
 #include <unistd.h>
 
-// S_ISREG(m)	fichier de données ?
-// S_ISDIR(m)	répertoire ?
-// S_ISCHR(m)	character device ?
-// S_ISBLK(m)	block device ?
-// S_ISFIFO(m)	FIFO (named pipe) ?
-// S_ISLNK(m)	lien symbolique ?
-// S_ISSOCK(m)	socket?
-
-// struct stat{
-//   dev_t     st_dev;     //device ID
-//   ino_t     st_ino;     //i-node number
-//   mode_t    st_mode;    //protection and type
-//   nlink_t   st_nlink;   //number of hard links
-//   uid_t     st_uid;     //user ID of owner
-//   gid_t     st_gid;     //group ID of owner
-//   dev_t     st_rdev;    //device type (if special file)
-//   off_t     st_size;    //total size, in bytes
-//   blksize_t st_blksize; //blocksize for filesystem I/O
-//   blkcnt_t  st_blocks;  //number of 512B blocks
-//   time_t    st_atime;   //time of last access
-//   time_t    st_mtime;   //time of last modification
-//   time_t    st_ctime;   //time of last change
-// };
-
 struct stat info;
 
+// Function to print permissions
 void print_permission(__mode_t mode) {
   char string[10];
-  string[0] = '-';
+  string[0] = (S_ISDIR(mode))   ? 'd'
+              : (S_ISLNK(mode)) ? 'l'
+                                : '-';
   string[1] = (mode & S_IRUSR) ? 'r' : '-';
   string[2] = (mode & S_IWUSR) ? 'w' : '-';
   string[3] = (mode & S_IXUSR) ? 'x' : '-';
@@ -51,6 +29,7 @@ void print_permission(__mode_t mode) {
   printf("%s\t", string);
 }
 
+// Function to print time
 void print_time(time_t time) {
   char time_last_change[1000];
   struct tm *timeinfo = localtime(&time);
@@ -58,30 +37,43 @@ void print_time(time_t time) {
   printf("%s\t", time_last_change);
 }
 
-void print_file_size(off_t size) { printf("%ld ", size); }
+// Function to print file size
+void print_file_size(off_t size) { printf("%ld\t", size); }
 
+// Function to print information of a file
 int file_infos(char *path) {
   if (path == NULL) {
     perror("Path == NULL");
     return EXIT_FAILURE;
   }
 
-  if (stat(path, &info) == -1) {
-    perror("stat");
+  if (lstat(path, &info) == -1) { 
+    perror("lstat");
     return EXIT_FAILURE;
   }
 
   print_permission(info.st_mode);
-
   print_file_size(info.st_size);
-
   print_time(info.st_mtim.tv_sec);
 
-  printf("%s\n", path);
+  if (S_ISLNK(info.st_mode)) {
+    char link_target[1024];
+    ssize_t len = readlink(path, link_target, sizeof(link_target) - 1);
+    if (len != -1) {
+      link_target[len] = '\0';
+      printf("%s -> %s\n", path, link_target);
+    } else {
+      perror("readlink");
+      return EXIT_FAILURE;
+    }
+  } else {
+    printf("%s\n", path);
+  }
 
   return EXIT_SUCCESS;
 }
 
+// Recursive function to list the contents of a directory
 int list_directory(const char *path) {
   DIR *dir;
   struct dirent *entry;
@@ -99,7 +91,16 @@ int list_directory(const char *path) {
     char fullpath[1024];
     snprintf(fullpath, sizeof(fullpath), "%s/%s", path, entry->d_name);
 
+    if (lstat(fullpath, &info) == -1) {
+      perror("lstat");
+      continue;
+    }
+
     file_infos(fullpath);
+
+    if (S_ISDIR(info.st_mode)) {
+      list_directory(fullpath);
+    }
   }
 
   closedir(dir);
@@ -113,6 +114,11 @@ int main(int argc, char *argv[]) {
   }
 
   char *path = argv[1];
+
+  if (lstat(path, &info) == -1) {
+    perror("lstat");
+    return EXIT_FAILURE;
+  }
 
   if (S_ISDIR(info.st_mode)) {
     printf("C'est un répertoire\n");
