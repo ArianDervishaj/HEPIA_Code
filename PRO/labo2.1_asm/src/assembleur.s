@@ -60,11 +60,29 @@ funcexo2_loop:
 .thumb_func
 funcexo3:
 
-	// insert your code here
+    // Initialize a and b
+    mov   r1, #2        // r1 = a = 2
+    mov   r2, #1        // r2 = b = 1
+    mov   r3, #0        // r3 = i = 0
 
+    cmp   r0, #0
+    beq   end           // If n == 0, branch to end
 
-	mov	pc, r14		/* end of subroutine */
+funcexo3_loop:
+    cmp   r3, r0
+    bge   end           // If i >= n, exit the loop
 
+    add   r1, r1, r2    // a = a + b (r1 = r1 + r2)
+    sub   r2, r1, r2    // b = a - b (r2 = r1 - r2)
+
+    add   r3, r3, #1    // i++
+
+    b     funcexo3_loop
+
+end:
+    mov   r0, r1
+
+    mov   pc, r14  /* end of subroutine */
 
 /*****************************************************
  * function     : exercice4
@@ -76,9 +94,26 @@ funcexo3:
 .thumb_func
 funcexo4:
 
-	// insert your code here
+    cmp     R2, #0
+    beq     shift_left          // If dir == 0, go to shift_left
+    cmp     R2, #1
+    beq     shift_right         // If dir == 1, go to shift_right
 
+    b       return_a
 
+shift_left:
+    lsls    R0, R0, #1         	// Shift lower 32 bits (R0) left by 1
+    lsl     R1, R1, #1         	// Shift upper 32 bits (R1) left by 1
+    adc 	r1,	r1,	#0			// Add carry bit r1 = r1 + 0 + c
+    b       return_a
+
+shift_right:
+    lsrs    R1, R1, #1			// Shift right s pour modifié les fanions
+    rrx		r0, r0				// RRX : Prend le carry shift et le met dans MSB et LSB vas dans le carry
+
+    b       return_a
+
+return_a:
 	mov	pc, r14		/* end of subroutine */
 
 

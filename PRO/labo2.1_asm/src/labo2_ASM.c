@@ -44,7 +44,7 @@ uint32_t function2_bonus(uint32_t val1)
 
 int main(void)
 {
-	exo = 1;    // change this number with the exercise number you want to test
+	exo = 4;    // change this number with the exercise number you want to test
 
 	uint32_t a,b,c;
 	uint8_t  i;
