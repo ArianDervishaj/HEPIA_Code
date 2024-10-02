@@ -2,11 +2,11 @@
  * GENERATED FILE - DO NOT EDIT
  * Copyright (c) 2008-2013 Code Red Technologies Ltd,
  * Copyright 2015, 2018-2019 NXP
- * (c) NXP Semiconductors 2013-2024
+ * (c) NXP Semiconductors 2013-2019
  * Generated linker script file for LPC1769
  * Created from linkscript.ldt by FMCreateLinkLibraries
- * Using Freemarker v2.3.30
- * MCUXpresso IDE v11.7.1 [Build 9221] [2023-03-28] on 1 Oct 2024, 20:37:01
+ * Using Freemarker v2.3.23
+ * MCUXpresso IDE v11.0.0 [Build 2516] [2019-06-05] on 9 oct. 2019 09:47:15
  */
 
 INCLUDE "labo2_2_asm_Debug_library.ld"
@@ -44,25 +44,30 @@ SECTIONS
 
         *(.after_vectors*)
 
+    } > MFlash512
+
+    .text : ALIGN(4)
+    {
        *(.text*)
        *(.rodata .rodata.* .constdata .constdata.*)
        . = ALIGN(4);
     } > MFlash512
     /*
      * for exception handling/unwind - some Newlib functions (in common
-     * with C++ and STDC++) use this.
+     * with C++ and STDC++) use this. 
      */
-    .ARM.extab : ALIGN(4)
+    .ARM.extab : ALIGN(4) 
     {
         *(.ARM.extab* .gnu.linkonce.armextab.*)
     } > MFlash512
 
+    __exidx_start = .;
+
     .ARM.exidx : ALIGN(4)
     {
-        __exidx_start = .;
         *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-        __exidx_end = .;
     } > MFlash512
+    __exidx_end = .;
  
     _etext = .;
         
@@ -72,7 +77,6 @@ SECTIONS
     {
         FILL(0xff)
         PROVIDE(__start_data_RAM2 = .) ;
-        PROVIDE(__start_data_RamAHB32 = .) ;
         *(.ramfunc.$RAM2)
         *(.ramfunc.$RamAHB32)
         *(.data.$RAM2)
@@ -81,95 +85,74 @@ SECTIONS
         *(.data.$RamAHB32.*)
         . = ALIGN(4) ;
         PROVIDE(__end_data_RAM2 = .) ;
-        PROVIDE(__end_data_RamAHB32 = .) ;
      } > RamAHB32 AT>MFlash512
-
     /* MAIN DATA SECTION */
-    .uninit_RESERVED (NOLOAD) : ALIGN(4)
+    .uninit_RESERVED (NOLOAD) :
     {
-        _start_uninit_RESERVED = .;
+        . = ALIGN(4) ;
         KEEP(*(.bss.$RESERVED*))
        . = ALIGN(4) ;
         _end_uninit_RESERVED = .;
-    } > RamLoc32 AT> RamLoc32
+    } > RamLoc32
 
     /* Main DATA section (RamLoc32) */
     .data : ALIGN(4)
     {
        FILL(0xff)
        _data = . ;
-       PROVIDE(__start_data_RAM = .) ;
-       PROVIDE(__start_data_RamLoc32 = .) ;
        *(vtable)
        *(.ramfunc*)
-       KEEP(*(CodeQuickAccess))
-       KEEP(*(DataQuickAccess))
-       *(RamFunction)
        *(.data*)
        . = ALIGN(4) ;
        _edata = . ;
-       PROVIDE(__end_data_RAM = .) ;
-       PROVIDE(__end_data_RamLoc32 = .) ;
     } > RamLoc32 AT>MFlash512
 
     /* BSS section for RamAHB32 */
-    .bss_RAM2 : ALIGN(4)
+    .bss_RAM2 :
     {
+       . = ALIGN(4) ;
        PROVIDE(__start_bss_RAM2 = .) ;
-       PROVIDE(__start_bss_RamAHB32 = .) ;
        *(.bss.$RAM2)
        *(.bss.$RamAHB32)
        *(.bss.$RAM2.*)
        *(.bss.$RamAHB32.*)
        . = ALIGN (. != 0 ? 4 : 1) ; /* avoid empty segment */
        PROVIDE(__end_bss_RAM2 = .) ;
-       PROVIDE(__end_bss_RamAHB32 = .) ;
-    } > RamAHB32 AT> RamAHB32
+    } > RamAHB32
 
     /* MAIN BSS SECTION */
-    .bss : ALIGN(4)
+    .bss :
     {
+        . = ALIGN(4) ;
         _bss = .;
-        PROVIDE(__start_bss_RAM = .) ;
-        PROVIDE(__start_bss_RamLoc32 = .) ;
         *(.bss*)
         *(COMMON)
         . = ALIGN(4) ;
         _ebss = .;
-        PROVIDE(__end_bss_RAM = .) ;
-        PROVIDE(__end_bss_RamLoc32 = .) ;
         PROVIDE(end = .);
-    } > RamLoc32 AT> RamLoc32
+    } > RamLoc32
 
     /* NOINIT section for RamAHB32 */
-    .noinit_RAM2 (NOLOAD) : ALIGN(4)
+    .noinit_RAM2 (NOLOAD) :
     {
-       PROVIDE(__start_noinit_RAM2 = .) ;
-       PROVIDE(__start_noinit_RamAHB32 = .) ;
+       . = ALIGN(4) ;
        *(.noinit.$RAM2)
        *(.noinit.$RamAHB32)
        *(.noinit.$RAM2.*)
        *(.noinit.$RamAHB32.*)
        . = ALIGN(4) ;
-       PROVIDE(__end_noinit_RAM2 = .) ;
-       PROVIDE(__end_noinit_RamAHB32 = .) ;
-    } > RamAHB32 AT> RamAHB32
+    } > RamAHB32
 
     /* DEFAULT NOINIT SECTION */
-    .noinit (NOLOAD): ALIGN(4)
+    .noinit (NOLOAD):
     {
+         . = ALIGN(4) ;
         _noinit = .;
-        PROVIDE(__start_noinit_RAM = .) ;
-        PROVIDE(__start_noinit_RamLoc32 = .) ;
         *(.noinit*)
          . = ALIGN(4) ;
         _end_noinit = .;
-       PROVIDE(__end_noinit_RAM = .) ;
-       PROVIDE(__end_noinit_RamLoc32 = .) ;        
-    } > RamLoc32 AT> RamLoc32
-
+    } > RamLoc32
     PROVIDE(_pvHeapStart = DEFINED(__user_heap_base) ? __user_heap_base : .);
-
     PROVIDE(_vStackTop = DEFINED(__user_stack_top) ? __user_stack_top : __top_RamLoc32 - 0);
 
     /* ## Create checksum value (used in startup) ## */

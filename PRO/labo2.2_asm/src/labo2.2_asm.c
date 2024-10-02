@@ -25,7 +25,7 @@ uint32_t funcexo2(uint32_t *, uint32_t *, uint32_t);
 void majuscule(char *s);
 
 /* global variables */
-int exo = 2;    // change this number with the exercise number you want to test;
+int exo = 3;    // change this number with the exercise number you want to test;
 
 int main(void)
 {
