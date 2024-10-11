@@ -6,7 +6,7 @@
  * Generated linker script file for LPC1769
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.30
- * MCUXpresso IDE v11.7.1 [Build 9221] [2023-03-28] on 2 Oct 2024, 15:09:45
+ * MCUXpresso IDE v11.7.1 [Build 9221] [2023-03-28] on 9 Oct 2024, 13:49:10
  */
 
 INCLUDE "labo2_3_asm_Debug_library.ld"

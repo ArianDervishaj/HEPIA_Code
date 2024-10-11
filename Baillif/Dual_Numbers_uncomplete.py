@@ -100,6 +100,27 @@ class Dual_Numbers:
         return Dual_Numbers.mult_inverse(a) * b
     
     
-
+    ### COS
+    def cos(a):        
+        if type(a) in [int,float]:
+            return Dual_Numbers(real = np.cos(a), dual = 0)
+        else:
+            return Dual_Numbers( real = np.cos(a.r) , dual = -np.sin(a.r) * a.d)
     
+    def sin(a):
+        if type(a) in [int,float]:
+            return Dual_Numbers(real= np.sin(a), dual = 0)
+        else:
+            return Dual_Numbers(real = np.sin(a.r), dual = np.cos(a.r) * a.d)
 
+    def exp(a):
+        if type(a) in [int,float]:
+            return Dual_Numbers(real = np.exp(a), dual = 0)
+        else:
+            return Dual_Numbers(real = np.exp(a.r), dual = np.exp(a.r) * a.d)
+    
+    def log(a):
+        if type(a) in [int,float]:
+            return Dual_Numbers(real=np.log(a), dual = 0)
+        else:
+            return Dual_Numbers(real = np.log(a.r), dual = (1/a.r) * a.d)

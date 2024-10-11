@@ -1,4 +1,7 @@
 from Dual_Numbers_uncomplete import *
 
-P = lambda x : (x) * (x) * (x) * (x) - 2 * (x) * (x) * (x) + (x) * (x) - 3 * (x) + 1
-print(P((Dual_Numbers(7,2))))
+
+dual = Dual_Numbers(3,2)
+
+print(dual)
+

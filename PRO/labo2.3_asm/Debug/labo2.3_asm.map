@@ -53,7 +53,7 @@ END GROUP
                 0x0000000020084000                __top_RamAHB32 = 0x20084000
                 0x0000000020084000                __top_RAM2 = 0x20084000
 
-.text           0x0000000000000000      0x274
+.text           0x0000000000000000      0x2b8
  FILL mask 0xff
                 0x0000000000000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -62,10 +62,10 @@ END GROUP
                 0x00000000000000cc                . = ALIGN (0x4)
                 0x00000000000000cc                __section_table_start = .
                 0x00000000000000cc                __data_section_table = .
-                0x00000000000000cc        0x4 LONG 0x274 LOADADDR (.data)
+                0x00000000000000cc        0x4 LONG 0x2b8 LOADADDR (.data)
                 0x00000000000000d0        0x4 LONG 0x10000000 ADDR (.data)
                 0x00000000000000d4        0x4 LONG 0x4 SIZEOF (.data)
-                0x00000000000000d8        0x4 LONG 0x274 LOADADDR (.data_RAM2)
+                0x00000000000000d8        0x4 LONG 0x2b8 LOADADDR (.data_RAM2)
                 0x00000000000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x00000000000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x00000000000000e4                __data_section_table_end = .
@@ -128,48 +128,48 @@ END GROUP
                 0x000000000000011a                bss_init
                 0x000000000000012a                ResetISR
  *(.text*)
- .text          0x0000000000000168       0x22 ./src/assembleur.o
+ .text          0x0000000000000168       0x66 ./src/assembleur.o
                 0x0000000000000168                funcexo1
                 0x0000000000000186                funcexo2
-                0x0000000000000188                funcexo3
- *fill*         0x000000000000018a        0x2 ff
- .text.main     0x000000000000018c       0xe4 ./src/labo2.3_asm.o
-                0x000000000000018c                main
+                0x00000000000001b4                funcexo3
+ *fill*         0x00000000000001ce        0x2 ff
+ .text.main     0x00000000000001d0       0xe4 ./src/labo2.3_asm.o
+                0x00000000000001d0                main
  .text.__weak_main
-                0x0000000000000270        0x4 /usr/local/mcuxpressoide-11.7.1_9221/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.7.1.202301190959/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
-                0x0000000000000270                __main
-                0x0000000000000270                __weak_main
+                0x00000000000002b4        0x4 /usr/local/mcuxpressoide-11.7.1_9221/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.7.1.202301190959/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
+                0x00000000000002b4                __main
+                0x00000000000002b4                __weak_main
  *(.rodata .rodata.* .constdata .constdata.*)
-                0x0000000000000274                . = ALIGN (0x4)
+                0x00000000000002b8                . = ALIGN (0x4)
 
-.glue_7         0x0000000000000274        0x0
- .glue_7        0x0000000000000274        0x0 linker stubs
+.glue_7         0x00000000000002b8        0x0
+ .glue_7        0x00000000000002b8        0x0 linker stubs
 
-.glue_7t        0x0000000000000274        0x0
- .glue_7t       0x0000000000000274        0x0 linker stubs
+.glue_7t        0x00000000000002b8        0x0
+ .glue_7t       0x00000000000002b8        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000000274        0x0
- .vfp11_veneer  0x0000000000000274        0x0 linker stubs
+.vfp11_veneer   0x00000000000002b8        0x0
+ .vfp11_veneer  0x00000000000002b8        0x0 linker stubs
 
-.v4_bx          0x0000000000000274        0x0
- .v4_bx         0x0000000000000274        0x0 linker stubs
+.v4_bx          0x00000000000002b8        0x0
+ .v4_bx         0x00000000000002b8        0x0 linker stubs
 
-.iplt           0x0000000000000274        0x0
- .iplt          0x0000000000000274        0x0 ./src/cr_startup_lpc176x.o
+.iplt           0x00000000000002b8        0x0
+ .iplt          0x00000000000002b8        0x0 ./src/cr_startup_lpc176x.o
 
-.rel.dyn        0x0000000000000274        0x0
- .rel.iplt      0x0000000000000274        0x0 ./src/cr_startup_lpc176x.o
+.rel.dyn        0x00000000000002b8        0x0
+ .rel.iplt      0x00000000000002b8        0x0 ./src/cr_startup_lpc176x.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x0000000000000274        0x0
-                0x0000000000000274                __exidx_start = .
+.ARM.exidx      0x00000000000002b8        0x0
+                0x00000000000002b8                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000000274                __exidx_end = .
-                0x0000000000000274                _etext = .
+                0x00000000000002b8                __exidx_end = .
+                0x00000000000002b8                _etext = .
 
-.data_RAM2      0x000000002007c000        0x0 load address 0x0000000000000274
+.data_RAM2      0x000000002007c000        0x0 load address 0x00000000000002b8
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM2 = .)
                 [!provide]                        PROVIDE (__start_data_RamAHB32 = .)
@@ -190,7 +190,7 @@ END GROUP
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _end_uninit_RESERVED = .
 
-.data           0x0000000010000000        0x4 load address 0x0000000000000274
+.data           0x0000000010000000        0x4 load address 0x00000000000002b8
  FILL mask 0xff
                 0x0000000010000000                _data = .
                 [!provide]                        PROVIDE (__start_data_RAM = .)
@@ -208,7 +208,7 @@ END GROUP
                 [!provide]                        PROVIDE (__end_data_RAM = .)
                 [!provide]                        PROVIDE (__end_data_RamLoc32 = .)
 
-.igot.plt       0x0000000010000004        0x0 load address 0x0000000000000278
+.igot.plt       0x0000000010000004        0x0 load address 0x00000000000002bc
  .igot.plt      0x0000000010000004        0x0 ./src/cr_startup_lpc176x.o
 
 .bss_RAM2       0x000000002007c000        0x0
@@ -261,8 +261,8 @@ END GROUP
                 0x0000000010008000                PROVIDE (_vStackTop = DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
                 [!provide]                        PROVIDE (__valid_user_code_checksum = (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x0000000000000000                _image_start = LOADADDR (.text)
-                0x0000000000000278                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x0000000000000278                _image_size = (_image_end - _image_start)
+                0x00000000000002bc                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x00000000000002bc                _image_size = (_image_end - _image_start)
 OUTPUT(labo2.3_asm.axf elf32-littlearm)
 LOAD linker stubs
 
@@ -283,10 +283,10 @@ LOAD linker stubs
  .comment       0x0000000000000049       0x4a ./src/labo2.3_asm.o
  .comment       0x0000000000000049       0x4a /usr/local/mcuxpressoide-11.7.1_9221/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.7.1.202301190959/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
 
-.debug_line     0x0000000000000000      0x4a6
- .debug_line    0x0000000000000000       0x55 ./src/assembleur.o
- .debug_line    0x0000000000000055      0x26f ./src/cr_startup_lpc176x.o
- .debug_line    0x00000000000002c4      0x1e2 ./src/labo2.3_asm.o
+.debug_line     0x0000000000000000      0x4c1
+ .debug_line    0x0000000000000000       0x70 ./src/assembleur.o
+ .debug_line    0x0000000000000070      0x26f ./src/cr_startup_lpc176x.o
+ .debug_line    0x00000000000002df      0x1e2 ./src/labo2.3_asm.o
 
 .debug_info     0x0000000000000000      0x45d
  .debug_info    0x0000000000000000       0x26 ./src/assembleur.o

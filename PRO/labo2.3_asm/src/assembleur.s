@@ -97,6 +97,23 @@ end:
 .thumb_func
 funcexo3:
 
+	PUSH {R4}
+
+	lsr R4, R1, #16 // Décale R1 de 16 a droite => il ne reste plus que c
+//	sxth r4, r4 // passe de 16 bits à 32
+
+	AND R1, R1, #0xFF // mask pour avoir b
+	sxtb r1, r1 // passe de 8 bits a 32
+
+	sxtb r2, r2 // 8 bit -> 32
+
+	ADD R0, R1
+	ADD R0, R2
+	ADD R0, r3
+	ADD R0, R4
+
+	POP {R4}
+
 	bx    lr
 
 //.weak add_sat

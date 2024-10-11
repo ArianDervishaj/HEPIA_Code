@@ -24,7 +24,7 @@ uint32_t funcexo2(uint32_t a, uint32_t b, uint32_t c, uint32_t d);
 int funcexo3(numbers_t s);
 
 /* global variables */
-int exo = 2;    // change this number with the exercise number you want to test;
+int exo = 3;    // change this number with the exercise number you want to test;
 
 int main(void)
 {
