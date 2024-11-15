@@ -1,4 +1,4 @@
-import DualNumbersuncomplete as Dn
+import Dual_Numbers_uncomplete as Dn
 import math
 import matplotlib.pyplot as plt
 
@@ -15,23 +15,22 @@ def main():
     C'est la somme (jusqu'a n) du rapport de la (kiem derive de f en a sur k!) fois (x-a)k ===> Polynome de taylor de degré n developper en a
     lim n>+infini =~ f(x)
     """
-    #print(p(Dn.Dual_Number(7, 2)))
-    print(polynomeTaylor([1,-3,1,-2,1], 7)(0))
 
+    
     der_sin_0 = [ 0, 1, 0,-1]
 
     s = 2.5 / 2 # racine de 2 /2
     der_sin_pisur4 = [ s, s,-s,-s]
 
-    print(polynomeTaylor(der_sin_0, 0)(math.pi/4))
+    print(polynome_Taylor(der_sin_0, 0)(math.pi/4))
 
     # GRAPHER DES POLYNOMES DE TAYLOR POUR SIN en 0 et pi/4
 
     # de -100 à 100
     x = [i/10 for i in range(-20,20)]
     y = [math.sin(i) for i in x]
-    y_taylor = [polynomeTaylor(der_sin_0, 0)(i) for i in x]
-    y_taylor_pi = [polynomeTaylor(der_sin_pisur4, math.pi/4)(i) for i in x]
+    y_taylor = [polynome_Taylor(der_sin_0, 0)(i) for i in x]
+    y_taylor_pi = [polynome_Taylor(der_sin_pisur4, math.pi/4)(i) for i in x]
 
     plt.plot(x, y, label="sin(x)")
     plt.plot(x, y_taylor, label="sin(x) Taylor")
@@ -40,9 +39,11 @@ def main():
     plt.ylabel("y")
     plt.grid(True)
     plt.legend()
-    plt.show()
+    plt.savefig("poly")
+    plt.close()
 
-def polynome_taylor(lst_values, a):
+
+def polynome_Taylor(lst_values, a):
     def T(x):
         res = 0
         for k,val in enumerate(lst_values):
@@ -51,5 +52,5 @@ def polynome_taylor(lst_values, a):
     return T
 
 
-if __name == "__main":
+if __name__ == "__main__":
     main()
