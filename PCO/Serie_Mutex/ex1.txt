@@ -1,0 +1,84 @@
+Coeur du thread A :
+    mutex_lock(&mutex_x);
+    use_X();
+    mutex_unlock(&mutex_x);
+
+Coeur du thread B :
+    mutex_lock(&mutex_y);
+    use_Y();
+    mutex_unlock(&mutex_y);
+
+Coeur du thread C :
+    mutex_lock(&mutex_z);
+    use_Z();
+    mutex_unlock(&mutex_z);
+
+avec :
+    use_X() {
+        X() ;
+        mutex_lock(&mutex_y);
+        Y();
+        mutex_unlock(&mutex_y);
+    }
+
+    use_Y() {
+        Y() ;
+        mutex_lock(&mutex_z);
+        Z();
+        mutex_unlock(&mutex_z);
+    }
+    use_Z() {
+        Z() ;
+        mutex_lock(&mutex_x);
+        X();
+        mutex_unlock(&mutex_x);
+    }
+
+
+1) Mais cette solution peut présenter un dead-lock . Démontrez-le de façon explicite.
+
+A attend que B libère mutex_y 
+B attend que C libère mutex_z
+C attend que A libère mutex_x
+
+Deadlock car pour que A libère mutex_x il faut que B libère mutex_y et pour que B libère mutex_y il faut que C libère mutex_z et pour que C libère mutex_z il faut que A libère mutex_x
+
+2) Est-ce que la solution proposée ci-dessus fonctionnerait si seulement les version A et B des
+threads étaient utilisés (à plusieurs exemplaires) ?
+
+Deux threads A : Si deux threads A s'exécutent simultanément, ils pourraient être bloqués en attente de mutex_x ou de mutex_y. Mais cela ne constitue pas un deadlock, car un thread finira par libérer ses ressources.
+
+Deux threads B : Même logique qu'avec les threads A ; il peut y avoir de l'attente, mais pas de deadlock.
+
+Un thread A et un thread B : L'attente pourrait survenir, mais pas de cycle bloquant (car A et B ne forment pas de boucle circulaire).
+
+
+
+3) Corrigez la solution complète , en conservant des sections critiques les plus courtes possibles
+
+A: 
+mutex_lock(&mutex_x);
+X();
+mutex_unlock(&mutex_x);
+
+mutex_lock(&mutex_y);
+Y();
+mutex_unlock(&mutex_y);
+
+B:
+mutex_lock(&mutex_y);
+Y();
+mutex_unlock(&mutex_y);
+
+mutex_lock(&mutex_z);
+Z();
+mutex_unlock(&mutex_z);
+
+C:
+mutex_lock(&mutex_z);
+Z();
+mutex_unlock(&mutex_z);
+
+mutex_lock(&mutex_x);
+X();
+mutex_unlock(&mutex_x);
